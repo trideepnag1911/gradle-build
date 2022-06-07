@@ -25,21 +25,14 @@ on:
 #  IMAGE: static-site
 
 jobs:
-  Checkout:
-    name: Checkout
-    runs-on: ubuntu-latest
-    environment: testing
-
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
   Gradle-build:
     name: Gradle-build
     runs-on: ubuntu-latest
     environment: testing
     
     steps:
+    - name: Checkout
+      uses: actions/checkout@v2
     - name: Java-Setup
       uses: actions/setup-java@v2
       with:
