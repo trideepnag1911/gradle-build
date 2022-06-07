@@ -44,7 +44,7 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      run: gradle build sonarqube --info
+      run: gradle build sonarqube
     - name: Check-Jar
       run: ls -lrt build/libs/*.jar
 
