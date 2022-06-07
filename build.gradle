@@ -3,6 +3,15 @@ apply plugin: 'eclipse'
 apply plugin: 'application'
 
 mainClassName = 'hello.HelloWorld'
+plugins {
+  id "org.sonarqube" version "3.3"
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "trideepnag1911_gradle-build_AYE-TZf5SklttwT_FlF9"
+  }
+}
 
 // tag::repositories[]
 repositories { 
@@ -29,13 +38,4 @@ dependencies {
 
 // tag::wrapper[]
 // end::wrapper[]
-plugins {
-  id "org.sonarqube" version "3.3"
-}
-
-sonarqube {
-  properties {
-    property "sonar.projectKey", "trideepnag1911_gradle-build_AYE-TZf5SklttwT_FlF9"
-  }
-}
 
