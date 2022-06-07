@@ -40,6 +40,12 @@ jobs:
         distribution: 'adopt'
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
+    - name: Gradle-build
+      timeout-minutes: 5
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      run: gradle build sonarqube --info
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
       env:
@@ -51,12 +57,6 @@ jobs:
       timeout-minutes: 5
       env:
        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    - name: Gradle-build
-      timeout-minutes: 5
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      run: gradle build sonarqube --info
     - name: Check-Jar
       run: ls -lrt build/libs/*.jar
 
