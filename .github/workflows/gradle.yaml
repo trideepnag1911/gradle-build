@@ -46,7 +46,7 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     - name: Gradle-build
-      run: ./gradlew build
+      run: gradlew build
     - name: Check-Jar
       run: ls -lrt
 
