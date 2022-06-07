@@ -43,7 +43,7 @@ jobs:
     - name: Gradle-build
       run: gradle build
     - name: Check-Jar
-      run: ls -lrt build/
+      run: ls -lrt build/libs/*.jar
 
     # Setup gcloud CLI
 #    - uses: google-github-actions/setup-gcloud@v0.2.0
