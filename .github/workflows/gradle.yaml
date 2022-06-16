@@ -15,6 +15,12 @@ on:
       - 'main'
 name: Gradle Build
 jobs:
+  Work-space:
+    name: workspace
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: echo $GITHUB_WORKSPACE
   Scan-Secret:
     name: Trufflehog Scan
     runs-on: ubuntu-latest
