@@ -15,7 +15,7 @@ on:
       - 'main'
 name: Gradle Build
 jobs:
-  Scan Secret:
+  Scan-Secret:
     name: Trufflehog Scan
     runs-on: ubuntu-latest
     steps:
