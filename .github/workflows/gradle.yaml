@@ -109,7 +109,9 @@ jobs:
         docker build -t app:$tag .
 
     - name: Push Image to Artifactory
-      run: docker push app:$tag
+      run: |-
+        tag=`git log | head -1 | awk '{print $NF}'`
+        docker push app:$tag
 
 
     # Setup gcloud CLI
