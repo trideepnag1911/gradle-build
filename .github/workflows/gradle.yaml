@@ -70,7 +70,9 @@ jobs:
       # Force to fail step after specific time
       timeout-minutes: 5
       env:
-       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with:
+        scanMetadataReportFile: build/sonar/report-task.txt
     - name: Check-Jar
       run: ls -lrt build/libs/*.jar
 
