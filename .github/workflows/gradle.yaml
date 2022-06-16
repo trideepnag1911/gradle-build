@@ -98,11 +98,10 @@ jobs:
       run: curl -sSf -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -O "http://34.122.63.81:8082/artifactory/gradle-dev/app.jar"
     - name: Setup Docker
       env:
-        ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-        ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
       run: |-
-        export DOCKER_OPTS+="--insecure-registry=34.122.63.81:8082"
-        docker login -u $ARTIFACTORY_USERNAME -p $ARTIFACTORY_PASSWORD "http://34.122.63.81:8082/artifactory/docker-local/"
+        docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD "https://index.docker.io/v1/"
     
     - name: Image Build
       run: |-
