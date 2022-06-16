@@ -101,7 +101,7 @@ jobs:
         ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
         ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
       run: |-
-        DOCKER_OPTS="--insecure-registry=34.122.63.81:8082"
+        export DOCKER_OPTS+="--insecure-registry=34.122.63.81:8082"
         docker login -u $ARTIFACTORY_USERNAME -p $ARTIFACTORY_PASSWORD "http://34.122.63.81:8082/artifactory/docker-local/"
     
     - name: Image Build
