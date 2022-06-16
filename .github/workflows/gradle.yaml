@@ -100,7 +100,7 @@ jobs:
       env:
         ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
         ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
-      run: docker login -u $ARTIFACTORY_USERNAME -p $ARTIFACTORY_PASSWORD "http://34.122.63.81:8082/artifactory/docker-local/"
+      run: docker login -u $ARTIFACTORY_USERNAME --password-stdin $ARTIFACTORY_PASSWORD "http://34.122.63.81:8082/artifactory/docker-local/"
     
     - name: Image Build
       run: |-
