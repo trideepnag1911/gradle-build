@@ -106,12 +106,12 @@ jobs:
     - name: Image Build
       run: |-
         tag=`git log | head -1 | awk '{print $NF}'`
-        docker build -t app:$tag .
+        docker build -t trideepnag/app:$tag .
 
     - name: Push Image to Artifactory
       run: |-
         tag=`git log | head -1 | awk '{print $NF}'`
-        docker push app:$tag
+        docker push trideepnag/app:$tag
 
 
     # Setup gcloud CLI
