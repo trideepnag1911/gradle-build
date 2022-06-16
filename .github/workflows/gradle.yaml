@@ -59,7 +59,7 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-      run: gradle build sonarqube --info
+      run: gradle build sonarqube
 #    - name: SonarQube Scan
 #      uses: sonarsource/sonarqube-scan-action@master
 #      env:
