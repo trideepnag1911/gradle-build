@@ -21,6 +21,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: max/secret-scan@master
+        run: trufflehog .
+        
 
 
 #env:
@@ -44,10 +46,6 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Trufflehog Scan
-      uses: max/secret-scan@master
-      with:
-        include_path: src/*
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
     - name: Gradle-build
