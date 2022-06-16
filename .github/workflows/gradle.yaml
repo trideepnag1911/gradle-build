@@ -9,6 +9,17 @@
 # 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, and DEPLOYMENT_NAME environment variables (below).
 #
 # For more support on how to run the workflow, please visit https://github.com/google-github-actions/setup-gcloud/tree/master/example-workflows/gke
+on:
+  push:
+    branches:
+      - 'main'
+name: Find Secrets
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: max/secret-scan@master
 
 name: Gradle Build Workflow
 
@@ -23,6 +34,7 @@ on:
 #  GKE_ZONE: us-central1-a   # TODO: update to cluster zone
 #  DEPLOYMENT_NAME: gke-test-with-github-actions # TODO: update to deployment name
 #  IMAGE: static-site
+
 
 jobs:
   Gradle-build:
