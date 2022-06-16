@@ -65,6 +65,8 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      with:
+        projectBaseDir: src/
     - name: check metareport
       run: ls -lrt build/sonar/report-task.txt
     - name: SonarQube Quality Gate check
