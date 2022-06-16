@@ -31,7 +31,6 @@ jobs:
 #  IMAGE: static-site
 
 
-jobs:
   Gradle-build:
     name: Gradle-build
     runs-on: ubuntu-latest
