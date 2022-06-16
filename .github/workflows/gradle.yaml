@@ -77,6 +77,9 @@ jobs:
         scanMetadataReportFile: build/sonar/report-task.txt
     - name: Check-Jar
       run: ls -lrt build/libs/*.jar
+    - name: Upload Jar in Artifactory
+      run: curl -X PUT -u u:p -T build/libs/*.jar "http://34.122.63.81:8082/artifactory/gradle-dev/app.jar"
+
 
     # Setup gcloud CLI
 #    - uses: google-github-actions/setup-gcloud@v0.2.0
