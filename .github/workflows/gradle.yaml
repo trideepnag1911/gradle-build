@@ -83,6 +83,33 @@ jobs:
         ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
       run: curl -X PUT -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -T build/libs/*.jar "http://34.122.63.81:8082/artifactory/gradle-dev/app.jar"
 
+  Container-Image-Build:
+    name: Container-Image-Build
+    runs-on: ubuntu-latest
+    environment: testing
+    needs: [ Scan-Secret, Gradle-build ]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Download Jar from Artifactory
+      env:
+        ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+        ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+      run: curl -sSf -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -O "http://34.122.63.81:8082/artifactory/gradle-dev/app.jar"
+    - name: Setup Docker
+      env:
+        ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+        ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+      run: docker login -u $ARTIFACTORY_USERNAME -p $ARTIFACTORY_PASSWORD "http://34.122.63.81:8082/artifactory/docker-local/"
+    
+    - name: Image Build
+      run: |-
+        tag=`git log | head -1 | awk '{print $NF}'`
+        docker build -t app:$tag
+
+    - name: Push Image to Artifactory
+      run: docker push app:$tag
+
 
     # Setup gcloud CLI
 #    - uses: google-github-actions/setup-gcloud@v0.2.0
