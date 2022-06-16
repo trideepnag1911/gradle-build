@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: echo $GITHUB_WORKSPACE
+      - run: echo $GITHUB_WORKSPACE && ls -lrt $GITHUB_WORKSPACE
   Scan-Secret:
     name: Trufflehog Scan
     runs-on: ubuntu-latest
