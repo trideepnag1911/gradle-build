@@ -17,6 +17,7 @@ name: Gradle Build
 jobs:
   Work-space:
     name: workspace
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
