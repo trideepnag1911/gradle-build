@@ -106,7 +106,7 @@ jobs:
     - name: Image Build
       run: |-
         tag=`git log | head -1 | awk '{print $NF}'`
-        docker build -t app:$tag
+        docker build -t app:$tag .
 
     - name: Push Image to Artifactory
       run: docker push app:$tag
