@@ -23,10 +23,6 @@ jobs:
 
 name: Gradle Build Workflow
 
-on:
-  push:
-    branches:
-      - 'main'
 
 #env:
 #  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
