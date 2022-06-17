@@ -99,18 +99,20 @@ jobs:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         REGISTRY: "https://index.docker.io/v1/"
-      run: bash .github/workflows/docker-setup.sh
+      run: |-
+        .github/workflows/docker-setup.sh
+
     - name: Image Build
       run: |-
         tag=`git log | head -1 | awk '{print $NF}'`
 #        docker build -t trideepnag/app:$tag .
-        bash .github/workflows/docker-build.sh
+        .github/workflows/docker-build.sh
 
     - name: Push Image to Artifactory
       run: |-
         tag=`git log | head -1 | awk '{print $NF}'`
 #        docker push trideepnag/app:$tag
-        bash .github/workflows/docker-push.sh
+        .github/workflows/docker-push.sh
 
     # Setup gcloud CLI
 #    - uses: google-github-actions/setup-gcloud@v0.2.0
