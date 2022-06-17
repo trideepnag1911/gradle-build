@@ -1,5 +1,5 @@
 #!/bin/bash
-docker push trideepnag/app:"$tag"
+docker push trideepnag/app:$1
 if [ $? -eq 0 ]
 then
 echo "Docker image push was successful"

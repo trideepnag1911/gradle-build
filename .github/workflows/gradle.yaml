@@ -102,10 +102,10 @@ jobs:
       run: bash .github/workflows/docker-setup.sh
 
     - name: Image Build
-      run: tag=`git log | head -1 | awk '{print $NF}'` && bash .github/workflows/docker-build.sh
+      run: tag=`git log | head -1 | awk '{print $NF}'` && bash .github/workflows/docker-build.sh $tag
 
     - name: Push Image to Artifactory
-      run: tag=`git log | head -1 | awk '{print $NF}'` && bash .github/workflows/docker-push.sh
+      run: tag=`git log | head -1 | awk '{print $NF}'` && bash .github/workflows/docker-push.sh $tag
 
     # Setup gcloud CLI
 #    - uses: google-github-actions/setup-gcloud@v0.2.0
