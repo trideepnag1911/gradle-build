@@ -62,14 +62,14 @@ jobs:
     - name: Check-Jar
       run: ls -lrt build/libs/*.jar
     - name: Upload Jar in Artifactory
-#      env:
-#        ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-#        ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+      env:
+        USER_NAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+        PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
 #      run: curl -X PUT -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -T build/libs/*.jar "http://34.122.63.81:8082/artifactory/gradle-dev/app.jar"
       uses: trideepnag1911/artifact-upload-in-artifactory@main
       with:
-        USER_NAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-        PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+#        USER_NAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+#        PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
         FILE: "build/libs/gs-gradle-0.1.0.jar"
         REGISTRY: "http://34.122.63.81:8082/artifactory/gradle-dev-local/app1.jar"
 
