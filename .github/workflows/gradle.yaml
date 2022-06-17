@@ -86,8 +86,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Download Jar from Artifactory
       env:
-        ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-        ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+        USER_NAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+        PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
         FILE: "http://34.122.63.81:8082/artifactory/gradle-dev/app1.jar"
 #      run: curl -sSf -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -O "http://34.122.63.81:8082/artifactory/gradle-dev/app.jar"
       uses: trideepnag1911/pull-artifact-from-artifactory@main
