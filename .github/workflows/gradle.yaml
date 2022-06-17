@@ -71,7 +71,7 @@ jobs:
         USER_NAME: ${{ secrets.ARTIFACTORY_USERNAME }}
         PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
         FILE: "build/libs/gs-gradle-0.1.0.jar"
-        REGISTRY: "http://34.122.63.81:8082/artifactory/gradle-dev/app_new.jar"
+        REGISTRY: "https://34.122.63.81:8082/artifactory/gradle-dev/app_new.jar"
 
 
   Container-Image-Build:
