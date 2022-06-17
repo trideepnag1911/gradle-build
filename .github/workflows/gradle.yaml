@@ -88,7 +88,11 @@ jobs:
       env:
         ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
         ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
-      run: curl -sSf -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -O "http://34.122.63.81:8082/artifactory/gradle-dev/app.jar"
+        FILE: "http://34.122.63.81:8082/artifactory/gradle-dev/app1.jar"
+#      run: curl -sSf -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -O "http://34.122.63.81:8082/artifactory/gradle-dev/app.jar"
+      uses: trideepnag1911/pull-artifact-from-artifactory@main
+
+
     - name: Setup Docker
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
