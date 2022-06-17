@@ -1,5 +1,5 @@
 #!/bin/bash
-docker build -t trideepnag/app:$tag .
+docker build -t trideepnag/app:"$tag" .
 if [ $? -eq 0 ]
 then
 echo "Docker image build was successful"
