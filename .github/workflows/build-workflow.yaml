@@ -83,6 +83,12 @@ jobs:
     - name: Image Build
       run: tag=`git log | head -1 | awk '{print $NF}'` && bash .github/workflows/docker-build.sh $tag
 
+    - name: Twistlock Scan
+      run: echo "This is a placeholder for Twistlock Scan"
+
+    - name: BlackDuck Scan
+      run: echo "This is a placeholder for BlackDuck Scan"
+
     - name: Push Image to Artifactory
       run: tag=`git log | head -1 | awk '{print $NF}'` && bash .github/workflows/docker-push.sh $tag
 
