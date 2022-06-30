@@ -25,8 +25,6 @@ jobs:
       - name: TruffleHog Scan
         uses: trideepnag1911/trufflehog-scan@main
         
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: Java-Setup
         uses: actions/setup-java@v2
         with:
@@ -51,4 +49,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           scanMetadataReportFile: build/sonar/report-task.txt
+      - name: Checkmarx Scan
+        run: echo "This is a place holder for Checkmarx Scan integration"
 
