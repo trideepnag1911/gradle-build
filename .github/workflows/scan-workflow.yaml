@@ -17,7 +17,7 @@ on:
 name: Scans
 jobs:
   Scan-Secret:
-    name: Trufflehog Scan
+    name: Scan
     runs-on: ubuntu-latest
     steps:
       - name: Code Checkout
