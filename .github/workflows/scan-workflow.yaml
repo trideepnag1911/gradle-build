@@ -51,5 +51,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           scanMetadataReportFile: build/sonar/report-task.txt
-      - name: Build
-        uses: trideepnag1911/gradle-build/.github/workflows/build-workflow.yaml@main
+
+  Build:
+    uses: trideepnag1911/gradle-build/.github/workflows/build-workflow.yaml@main
