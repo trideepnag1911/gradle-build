@@ -1,0 +1,92 @@
+# This workflow will build a docker container, publish it to Google Container Registry, and deploy it to GKE when a release is created
+#
+# To configure this workflow:
+#
+# 1. Ensure that your repository contains the necessary configuration for your Google Kubernetes Engine cluster, including deployment.yml, kustomization.yml, service.yml, etc.
+#
+# 2. Set up secrets in your workspace: GKE_PROJECT with the name of the project and GKE_SA_KEY with the Base64 encoded JSON service account key (https://github.com/GoogleCloudPlatform/github-actions/tree/docs/service-account-key/setup-gcloud#inputs).
+#
+# 3. Change the values for the GKE_ZONE, GKE_CLUSTER, IMAGE, and DEPLOYMENT_NAME environment variables (below).
+#
+# For more support on how to run the workflow, please visit https://github.com/google-github-actions/setup-gcloud/tree/master/example-workflows/gke
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_call:
+name: Build
+jobs:
+  Build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code Checkout
+        uses: actions/checkout@v2
+      - name: Java-Setup
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Gradle Build
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        uses: trideepnag1911/gradle-build-with-sonarqube@main
+
+#    - name: SonarQube Scan
+#      uses: sonarsource/sonarqube-scan-action@master
+#      env:
+#        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      # Force to fail step after specific time
+      - name: Check-Jar
+        run: ls -lrt build/libs/*.jar
+      - name: Upload Jar in Artifactory
+        env:
+          USER_NAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+          PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          FILE: "build/libs/gs-gradle-0.1.0.jar"
+          REGISTRY: "http://34.122.63.81:8082/artifactory/gradle-build/app1.jar"
+#      run: curl -X PUT -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -T build/libs/*.jar "http://34.122.63.81:8082/artifactory/gradle-dev/app.jar"
+        uses: trideepnag1911/artifact-upload-in-artifactory@main
+#      with:
+#        USER_NAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+#        PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+#        FILE: "build/libs/gs-gradle-0.1.0.jar"
+#        REGISTRY: "http://34.122.63.81:8082/artifactory/gradle-dev-local/app1.jar"
+
+
+  Container-Image-Build:
+    name: Container-Image-Build
+    runs-on: ubuntu-latest
+    environment: testing
+    needs: Build 
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Download Jar from Artifactory
+      env:
+        USER_NAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+        PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+        FILE: "http://34.122.63.81:8082/artifactory/gradle-build/app1.jar"
+        TARGET: "app.jar"
+#      run: curl -sSf -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -O "http://34.122.63.81:8082/artifactory/gradle-dev/app.jar"
+      uses: trideepnag1911/pull-artifact-from-artifactory@main
+
+
+    - name: Setup Docker
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        REGISTRY: "https://index.docker.io/v1/"
+      run: bash .github/workflows/docker-setup.sh
+
+    - name: Image Build
+      run: tag=`git log | head -1 | awk '{print $NF}'` && bash .github/workflows/docker-build.sh $tag
+
+    - name: Push Image to Artifactory
+      run: tag=`git log | head -1 | awk '{print $NF}'` && bash .github/workflows/docker-push.sh $tag
+
