@@ -52,4 +52,4 @@ jobs:
         with:
           scanMetadataReportFile: build/sonar/report-task.txt
       - name: Build
-        uses: trideepnag1911/.github/workflows/build-workflow.yaml@main
+        uses: trideepnag1911/gradle-build/.github/workflows/build-workflow.yaml@main
