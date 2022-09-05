@@ -29,13 +29,16 @@ jobs:
           distribution: 'adopt'
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
-      - name: Check Gradle
-        run: |
-              ls -lrt /opt/hostedtoolcache/Java_Adopt_jdk/11.0.16-101/x64
-              which gradle
+      - name: Gradle Build Action
+        uses: gradle/gradle-build-action@v2.3.0
 
-      - name: Gradle Build
-        run: gradlew build
+      #- name: Check Gradle
+      #  run: |
+      #        ls -lrt /opt/hostedtoolcache/Java_Adopt_jdk/11.0.16-101/x64
+      #        which gradle
+
+      #- name: Gradle Build
+      #  run: gradlew build
       #- name: SonarQube Scan
       #  uses: sonarsource/sonarqube-scan-action@master
       #  env:
