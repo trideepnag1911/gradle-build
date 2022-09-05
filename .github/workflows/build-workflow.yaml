@@ -40,14 +40,14 @@ jobs:
       # Force to fail step after specific time
       - name: Check-Jar
         run: ls -lrt build/libs/*.jar
-      - name: Upload Jar in Artifactory
-        env:
-          USER_NAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-          PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
-          FILE: "build/libs/gs-gradle-0.1.0.jar"
-          REGISTRY: "http://34.122.63.81:8082/artifactory/gradle-build/app1.jar"
+      #- name: Upload Jar in Artifactory
+      #  env:
+      #    USER_NAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+      #    PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+      #    FILE: "build/libs/gs-gradle-0.1.0.jar"
+      #    REGISTRY: "http://34.122.63.81:8082/artifactory/gradle-build/app1.jar"
 #      run: curl -X PUT -u $ARTIFACTORY_USERNAME:$ARTIFACTORY_PASSWORD -T build/libs/*.jar "http://34.122.63.81:8082/artifactory/gradle-dev/app.jar"
-        uses: trideepnag1911/artifact-upload-in-artifactory@main
+      #  uses: trideepnag1911/artifact-upload-in-artifactory@main
 #      with:
 #        USER_NAME: ${{ secrets.ARTIFACTORY_USERNAME }}
 #        PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
