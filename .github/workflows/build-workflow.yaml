@@ -18,7 +18,7 @@ name: Build
 jobs:
   Build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Code Checkout
         uses: actions/checkout@v2
@@ -32,11 +32,11 @@ jobs:
 
       - name: Gradle Build
         run: gradle build
-#    - name: SonarQube Scan
-#      uses: sonarsource/sonarqube-scan-action@master
-#      env:
-#        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       # Force to fail step after specific time
       - name: Check-Jar
         run: ls -lrt build/libs/*.jar
