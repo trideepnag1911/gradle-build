@@ -37,8 +37,8 @@ jobs:
       #        ls -lrt /opt/hostedtoolcache/Java_Adopt_jdk/11.0.16-101/x64
       #        which gradle
 
-      #- name: Gradle Build
-      #  run: gradlew build
+      - name: Gradle Build
+        run: gradle build
       #- name: SonarQube Scan
       #  uses: sonarsource/sonarqube-scan-action@master
       #  env:
