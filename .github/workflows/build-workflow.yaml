@@ -42,7 +42,7 @@ jobs:
       - name: Check variable
         env:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: echo $SONAR_HOST_URL
+        run: echo $SONAR_HOST_URL | base64 -d
       #- name: SonarQube Scan
       #  uses: sonarsource/sonarqube-scan-action@master
       #  env:
