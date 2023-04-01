@@ -18,7 +18,7 @@ name: Scans
 jobs:
   Scan-Secret:
     name: Scan
-    runs-on: self-hosted
+    runs-on: runner-set
     steps:
       - name: Code Checkout
         uses: actions/checkout@v2
