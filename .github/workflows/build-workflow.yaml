@@ -104,3 +104,4 @@ jobs:
     - name: Push Image to Artifactory
       run: tag=`git log | head -1 | awk '{print $NF}'` && bash .github/workflows/docker-push.sh $tag
 
+
